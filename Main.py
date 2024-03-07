@@ -3,7 +3,6 @@ import pandas as pd
 from datetime import datetime
 from scipy.stats import norm
 from scipy.optimize import brentq
-# import seaborn as sns
 import matplotlib.pyplot as plt
 import warnings
 
@@ -48,7 +47,10 @@ def implied_volatility(option_price, s, k, t, r, option_type):
             return np.nan  # Consider adjusting this to use a fallback method
 
 
-file_path = "/Users/giuliogranati/PycharmProjects/Prog final Dupire Vol/QQQ_option_chain.xlsx"  # Change this
+# file_path = "/Users/giuliogranati/PycharmProjects/Prog final Dupire Vol/QQQ_option_chain.xlsx"
+# file_path = "/Users/giuliogranati/PycharmProjects/Prog final Dupire Vol/SPY_option_chain.xlsx"
+file_path = "/Users/giuliogranati/PycharmProjects/Prog final Dupire Vol/NVDA_option_chain.xlsx"
+
 option_chain = pd.read_excel(file_path)
 
 option_chain['Expire Date'] = pd.to_datetime(option_chain['Expire Date'])
@@ -60,7 +62,6 @@ option_chain['Is Put'] = option_chain['Is Put'].astype(str)
 
 missing_prices_before = option_chain[option_chain['Last Price'].isna()]['Strike Price'].unique()
 print(f"Missing Prices Before: {len(missing_prices_before)} Strikes")
-
 
 def fill_missing_prices(row):
     if pd.isna(row['Last Price']):
@@ -75,11 +76,10 @@ def fill_missing_prices(row):
         # Print details about the operation
 
 
-# Return the Last Price from the closest strike with a non-NaN price
+        # Return the Last Price from the closest strike with a non-NaN price
         return non_nan_prices.loc[closest_idx, 'Last Price']
     else:
         return row['Last Price']
-
 
 option_chain['Last Price'] = option_chain.apply(fill_missing_prices, axis=1)
 
@@ -102,7 +102,9 @@ Filled_Option_Chain = strikes_filled
 
 # print(f"Option chain saved to {output_file_path}")
 
-S_0 = 434
+# S_0 = 434
+# S_0 = 508
+S_0 =885
 r = 0.055
 
 # Calculate implied volatility for all options
@@ -429,7 +431,7 @@ ttm = np.array(df_no_outliers_with_ttm['TimeToMaturity'])
 vol = np.array(df_no_outliers_with_ttm['Local Volatility'])
 
 # Creating a 3D plot
-fig = plt.figure(figsize=(10, 7))
+fig = plt.figure(figsize=(14, 10))
 ax = fig.add_subplot(111, projection='3d')
 
 # Plotting the surface
