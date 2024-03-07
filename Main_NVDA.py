@@ -46,7 +46,7 @@ def implied_volatility(option_price, s, k, t, r, option_type):
             # Fallback or default IV value
             return np.nan  # Consider adjusting this to use a fallback method
 
-
+# Change this------------------------------v
 file_path = "/Users/giuliogranati/PycharmProjects/Prog final Dupire Vol/NVDA_option_chain.xlsx"
 
 option_chain = pd.read_excel(file_path)
