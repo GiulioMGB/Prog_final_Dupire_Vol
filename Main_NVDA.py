@@ -47,8 +47,7 @@ def implied_volatility(option_price, s, k, t, r, option_type):
             return np.nan  # Consider adjusting this to use a fallback method
 
 
-file_path = "/Users/giuliogranati/PycharmProjects/Prog final Dupire Vol/QQQ_option_chain.xlsx"
-
+file_path = "/Users/giuliogranati/PycharmProjects/Prog final Dupire Vol/NVDA_option_chain.xlsx"
 
 option_chain = pd.read_excel(file_path)
 
@@ -101,7 +100,8 @@ Filled_Option_Chain = strikes_filled
 
 # print(f"Option chain saved to {output_file_path}")
 
-S_0 = 434
+
+S_0 = 885
 
 r = 0.055
 
